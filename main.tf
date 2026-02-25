@@ -12,6 +12,7 @@ resource "aws_key_pair" "calgary_project_key" {
 resource "aws_security_group" "calgary_sg" {
   name        = "Calgary_Project_SG"
   description = "Security Group para el proyecto de Christian"
+  vpc_id      = aws_vpc.main_vpc.id
 
   ingress {
     from_port   = 22
@@ -41,11 +42,12 @@ data "aws_ami" "amazon_linux_2023" {
   }
 }
 
-# La Instancia (Actualizada para usar el buscador dinámico)
+# La Instancia
 resource "aws_instance" "calgary_server" {
   ami                    = data.aws_ami.amazon_linux_2023.id # <--- Aquí usamos el buscador
   instance_type          = "t3.micro"
   key_name               = aws_key_pair.calgary_project_key.key_name
+  subnet_id              = aws_subnet.public_subnet.id
   vpc_security_group_ids = [aws_security_group.calgary_sg.id]
 
   user_data = <<-EOF
