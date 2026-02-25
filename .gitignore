@@ -1,0 +1,18 @@
+# Local .terraform directories
+**/.terraform/*
+
+# .tfstate files (CONTIENEN SECRETOS)
+*.tfstate
+*.tfstate.*
+
+# Crash log files
+crash.log
+
+# Variables locales y secretos
+*.tfvars
+*.tfvars.json
+override.tf
+override.tf.json
+
+# User-specific files
+.terraform.lock.hcl
