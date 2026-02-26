@@ -1,21 +1,28 @@
 # Project Aurora Shield 🛡️
-**Cloud Infrastructure & Security Hardening Lab**
+**Advanced Cloud Networking & Security Hardening Lab**
 
 ## Overview
-This project demonstrates an automated deployment of a hardened Linux node on AWS using **Infrastructure as Code (Terraform)**. It focuses on resource optimization and security best practices for cloud environments.
+This project demonstrates a production-grade deployment of a hardened Linux infrastructure on AWS. It features a custom-built network topology and active security monitoring tools.
+
+## Key Evolution: Phase 2 & 3
+We transitioned from a default AWS setup to a **Custom VPC Architecture**, implementing network isolation and real-time threat detection.
 
 ## Architecture Features
-* **Provider:** AWS (us-east-1)
-* **Infrastructure:** Immutable EC2 Instance (Amazon Linux 2023)
-* **Security:** * Automated SSH Key Pair provisioning.
-    * Strict Security Group rules (Port 22 restricted).
-* **Performance Optimization:** * **ZRAM Implementation:** Configured via User Data to optimize memory efficiency using zstd compression.
-    * Dynamic AMI Fetching using Terraform Data Sources.
+* **Infrastructure as Code:** 100% automated with Terraform.
+* **Networking (VPC):** * Custom VPC (10.0.0.0/16) for complete isolation.
+    * Public Subnet with specific Route Tables and Internet Gateway.
+* **Security & Hardening:**
+    * **ZRAM Optimization:** Kernel-level memory compression (zstd) via User Data.
+    * **SIEM Junior Lab:** Custom Bash monitoring scripts for `systemd-journald` to detect SSH brute-force attacks.
+    * **Security Groups:** "Allow-list" approach for SSH traffic.
+
+## Security Insights
+During testing, the system successfully identified and logged unauthorized access attempts from external IPs (e.g., brute-force bots), confirming the effectiveness of the monitoring layer.
 
 ## How to Deploy
-1. Clone the repository.
-2. Initialize Terraform: `terraform init`
-3. Deploy: `terraform apply`
+1. `terraform init`
+2. `terraform apply`
+3. Run `./check_attacks.sh` to see real-time security logs.
 
 ---
-*Maintained by Christian | Northern Fortress Labs*
+*Developed by Christian | Northern Fortress Labs*
