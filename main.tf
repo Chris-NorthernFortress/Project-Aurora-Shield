@@ -15,10 +15,10 @@ resource "aws_security_group" "calgary_sg" {
   vpc_id      = aws_vpc.main_vpc.id
 
   ingress {
-    from_port   = 22
-    to_port     = 22
+    from_port   = 2222 # <--- Cambia de 22 a 2222
+    to_port     = 2222
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"] 
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   egress {
